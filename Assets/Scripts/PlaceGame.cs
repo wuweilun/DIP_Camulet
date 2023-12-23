@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
-using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -14,49 +15,48 @@ public class PlaceGame : MonoBehaviour {
     private GameObject Prefab;
 
     private ARRaycastManager ARRaycastManager;
-
     private ARPlaneManager ARPlaneManager;
 
     private List<ARRaycastHit> Hits = new List<ARRaycastHit>();
 
-    // Start is called before the first frame update
-    void Start() {
+    private MsgBox MsgBox;
 
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
+    private Vector2 TouchPosition;
 
     private void Awake() {
         ARRaycastManager = GetComponent<ARRaycastManager>();
         ARPlaneManager = GetComponent<ARPlaneManager>();
-
     }
 
-    private void OnEnable() {
-        TouchSimulation.Enable();
-        TouchSimulation.Enable();
-        UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerDown += FingerDown;
+    // Start is called before the first frame update
+    void Start() {
+        MsgBox = GameObject.FindGameObjectWithTag("MsgBox").GetComponent<MsgBox>();
+        MsgBox.AddText("Welcome!");
     }
 
-    private void OnDisable() {
-        TouchSimulation.Disable();
-        TouchSimulation.Disable();
-        UnityEngine.InputSystem.EnhancedTouch.Touch.onFingerDown -= FingerDown;
-    }
-
-    private void FingerDown(Finger finger) {
-        if (finger.index != 0) {
+    // Update is called once per frame
+    void Update() {
+        if (!TryGetTouchPosition(out TouchPosition)) {
             return;
         }
+        FingerDown(TouchPosition);
+    }
 
-        if (ARRaycastManager.Raycast(finger.currentTouch.screenPosition, Hits, TrackableType.PlaneWithinPolygon)) {
-            foreach (ARRaycastHit hit in Hits) {
-                Pose pose = hit.pose;
-                GameObject obj = Instantiate(Prefab, pose.position, pose.rotation);
-            }
+    private bool TryGetTouchPosition(out Vector2 touchPosition) {
+        if (Input.touchCount > 0) {
+            touchPosition = Input.GetTouch(0).position;
+            return true;
+        }
+        touchPosition = default;
+        return false;
+    }
+
+    private void FingerDown(Vector2 touchPosition) {
+        MsgBox.AddText("FingerDown: " + touchPosition);
+        if (ARRaycastManager.Raycast(touchPosition, Hits, TrackableType.PlaneWithinPolygon)) {
+            Pose pose = Hits[0].pose;
+            Instantiate(Prefab, pose.position,pose.rotation);
+            MsgBox.AddText($"FingerDown: Init obj at {pose.position} {pose.rotation}");
         }
     }
 }
