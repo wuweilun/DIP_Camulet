@@ -6,6 +6,8 @@ TagManager:
   tags:
   - MsgBox
   - MsgBoxTextMesh
+  - ArOrigin
+  - GameOrigin
   layers:
   - Default
   - TransparentFX

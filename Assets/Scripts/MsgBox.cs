@@ -8,8 +8,7 @@ using UnityEngine;
 
 public class MsgBox : MonoBehaviour {
     private List<string> MessageQueue = new List<string>();
-    private List<string> DisplayQueue = new List<string>();
-    private int MaxLine = 40;
+    private int MaxLine = 25;
     private TextMeshProUGUI TextMesh;
 
     // Start is called before the first frame update
@@ -24,20 +23,17 @@ public class MsgBox : MonoBehaviour {
     }
 
     public void AddText(string text) {
-        MessageQueue.Add(text);
+        MessageQueue.Add("[" + DateTime.Now.ToString("HH:mm:ss") + "] " + text + "\n");
     }
 
     void Display() {
         lock (MessageQueue) {
-            DisplayQueue.AddRange(MessageQueue);
-            MessageQueue.Clear();
-            int dcount = DisplayQueue.Count;
-            int removeCount = dcount - MaxLine;
-            DisplayQueue.RemoveRange(0, removeCount);
+            int removeCount = MessageQueue.Count - MaxLine;
+            MessageQueue.RemoveRange(0, removeCount);
 
             string result = "";
-            foreach (var msg in DisplayQueue) {
-                result += "[" + DateTime.Now.ToString("HH:mm:ss") + "] " + msg + "\n";
+            foreach (var msg in MessageQueue) {
+                result += msg;
             }
             TextMesh.text = result;
         }

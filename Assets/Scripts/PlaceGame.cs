@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net.Http.Headers;
 using TMPro;
 using Unity.VisualScripting;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.XR.ARFoundation;
@@ -11,6 +12,9 @@ using UnityEngine.XR.ARSubsystems;
 
 [RequireComponent(requiredComponent: typeof(ARRaycastManager), requiredComponent2: typeof(ARPlaneManager))]
 public class PlaceGame : MonoBehaviour {
+    /// <summary>
+    /// For testing. Spawn a cube.
+    /// </summary>
     [SerializeField]
     private GameObject Prefab;
 
@@ -23,6 +27,8 @@ public class PlaceGame : MonoBehaviour {
 
     private Vector2 TouchPosition;
 
+    private GameObject GameOrigin;
+
     private void Awake() {
         ARRaycastManager = GetComponent<ARRaycastManager>();
         ARPlaneManager = GetComponent<ARPlaneManager>();
@@ -31,6 +37,7 @@ public class PlaceGame : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         MsgBox = GameObject.FindGameObjectWithTag("MsgBox").GetComponent<MsgBox>();
+        GameOrigin = GameObject.FindGameObjectWithTag("GameOrigin");
         MsgBox.AddText("Welcome!");
     }
 
@@ -55,7 +62,8 @@ public class PlaceGame : MonoBehaviour {
         MsgBox.AddText("FingerDown: " + touchPosition);
         if (ARRaycastManager.Raycast(touchPosition, Hits, TrackableType.PlaneWithinPolygon)) {
             Pose pose = Hits[0].pose;
-            Instantiate(Prefab, pose.position,pose.rotation);
+            //Instantiate(Prefab, pose.position,pose.rotation);
+            GameOrigin.transform.position = pose.position;
             MsgBox.AddText($"FingerDown: Init obj at {pose.position} {pose.rotation}");
         }
     }
