@@ -1866,9 +1866,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 7414126791596113512, guid: 76072199595165447a104e1f6617f3f1, type: 3}
-  RotateButtonL: {fileID: 961346187}
-  RotateButtonR: {fileID: 2102825060}
-  IsPositionLockedToggle: {fileID: 2039188802}
+  RotateButtonL: {fileID: 961346189}
+  RotateButtonR: {fileID: 2102825062}
+  IsPositionLockedToggle: {fileID: 2039188804}
 --- !u!114 &1659859601
 MonoBehaviour:
   m_ObjectHideFlags: 0

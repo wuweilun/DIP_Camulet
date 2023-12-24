@@ -6,8 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
-using UnityEngine.InputSystem.EnhancedTouch;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -20,13 +19,13 @@ public class PlaceGame : MonoBehaviour {
     private GameObject Prefab;
 
     [SerializeField]
-    public GameObject RotateButtonL;
+    Button RotateButtonL;
 
     [SerializeField]
-    public GameObject RotateButtonR;
+    public Button RotateButtonR;
 
     [SerializeField]
-    public GameObject IsPositionLockedToggle;
+    public Toggle IsPositionLockedToggle;
 
     private ARRaycastManager ARRaycastManager;
     private ARPlaneManager ARPlaneManager;
@@ -43,10 +42,6 @@ public class PlaceGame : MonoBehaviour {
 
     private bool IsPositionLocked = false;
 
-    private Button rotateButtonL;
-    private Button rotateButtonR;
-    private Toggle isPositionLockedToggle;
-
     private void Awake() {
         ARRaycastManager = GetComponent<ARRaycastManager>();
         ARPlaneManager = GetComponent<ARPlaneManager>();
@@ -56,21 +51,13 @@ public class PlaceGame : MonoBehaviour {
     void Start() {
         MsgBox = GameObject.FindGameObjectWithTag("MsgBox").GetComponent<MsgBox>();
         GameOrigin = GameObject.FindGameObjectWithTag("GameOrigin");
-        try {
-            rotateButtonL = RotateButtonL.GetComponent<Button>();
-            rotateButtonR = RotateButtonR.GetComponent<Button>();
-            isPositionLockedToggle = IsPositionLockedToggle.GetComponent<Toggle>();
-        }
-        catch (Exception) {
-        }
-
         MsgBox.AddText("Welcome!");
     }
 
     // Update is called once per frame
     void Update() {
-        if (isPositionLockedToggle != null) {
-            IsPositionLocked = isPositionLockedToggle.value;
+        if (IsPositionLockedToggle != null) {
+            IsPositionLocked = IsPositionLockedToggle.isOn;
         }
 
         if (IsPositionLocked) {
