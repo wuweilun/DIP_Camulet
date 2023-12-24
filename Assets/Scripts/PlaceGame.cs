@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.UIElements;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -17,6 +18,9 @@ public class PlaceGame : MonoBehaviour {
     /// </summary>
     [SerializeField]
     private GameObject Prefab;
+
+    public Button RotateButtonL;
+    public Button RotateButtonR;
 
     private ARRaycastManager ARRaycastManager;
     private ARPlaneManager ARPlaneManager;
@@ -47,6 +51,9 @@ public class PlaceGame : MonoBehaviour {
             return;
         }
         FingerDown(TouchPosition);
+        if (RotateButtonL != null && RotateButtonL.HasMouseCapture()) {
+            RotateGameOrigin("R");
+        }
     }
 
     private bool TryGetTouchPosition(out Vector2 touchPosition) {
@@ -65,6 +72,20 @@ public class PlaceGame : MonoBehaviour {
             //Instantiate(Prefab, pose.position,pose.rotation);
             GameOrigin.transform.position = pose.position;
             MsgBox.AddText($"FingerDown: Init obj at {pose.position} {pose.rotation}");
+        }
+    }
+
+    private void RotateGameOrigin(string direction) {
+        if (direction == "L") {
+            MsgBox.AddText("RotateGameOrigin L");
+            GameOrigin.transform.rotation.
+        }
+        else if (direction == "R") {
+            MsgBox.AddText("RotateGameOrigin R");
+
+        }
+        else {
+            MsgBox.AddText("RotateGameOrigin error. direction=" + direction);
         }
     }
 }

@@ -7,13 +7,13 @@ using UnityEditor;
 using UnityEngine;
 
 public class MsgBox : MonoBehaviour {
+    public TextMeshProUGUI TextMesh;
+
     private List<string> MessageQueue = new List<string>();
     private int MaxLine = 25;
-    private TextMeshProUGUI TextMesh;
 
     // Start is called before the first frame update
     void Start() {
-        TextMesh = GameObject.FindGameObjectWithTag("MsgBoxTextMesh").GetComponent<TextMeshProUGUI>();
         TextMesh.text = "";
     }
 
@@ -29,13 +29,21 @@ public class MsgBox : MonoBehaviour {
     void Display() {
         lock (MessageQueue) {
             int removeCount = MessageQueue.Count - MaxLine;
-            MessageQueue.RemoveRange(0, removeCount);
+            if (removeCount > 0) {
+                MessageQueue.RemoveRange(0, removeCount);
+            }
 
             string result = "";
             foreach (var msg in MessageQueue) {
                 result += msg;
             }
             TextMesh.text = result;
+        }
+    }
+
+    public void Clear() {
+        lock (MessageQueue) {
+            MessageQueue.Clear();
         }
     }
 }
