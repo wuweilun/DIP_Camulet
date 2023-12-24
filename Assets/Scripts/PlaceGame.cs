@@ -19,8 +19,14 @@ public class PlaceGame : MonoBehaviour {
     [SerializeField]
     private GameObject Prefab;
 
-    public Button RotateButtonL;
-    public Button RotateButtonR;
+    [SerializeField]
+    public GameObject RotateButtonL;
+
+    [SerializeField]
+    public GameObject RotateButtonR;
+
+    [SerializeField]
+    public GameObject IsPositionLockedToggle;
 
     private ARRaycastManager ARRaycastManager;
     private ARPlaneManager ARPlaneManager;
@@ -33,6 +39,14 @@ public class PlaceGame : MonoBehaviour {
 
     private GameObject GameOrigin;
 
+    private int RotationStep = 10;
+
+    private bool IsPositionLocked = false;
+
+    private Button rotateButtonL;
+    private Button rotateButtonR;
+    private Toggle isPositionLockedToggle;
+
     private void Awake() {
         ARRaycastManager = GetComponent<ARRaycastManager>();
         ARPlaneManager = GetComponent<ARPlaneManager>();
@@ -42,17 +56,39 @@ public class PlaceGame : MonoBehaviour {
     void Start() {
         MsgBox = GameObject.FindGameObjectWithTag("MsgBox").GetComponent<MsgBox>();
         GameOrigin = GameObject.FindGameObjectWithTag("GameOrigin");
+        try {
+            rotateButtonL = RotateButtonL.GetComponent<Button>();
+            rotateButtonR = RotateButtonR.GetComponent<Button>();
+            isPositionLockedToggle = IsPositionLockedToggle.GetComponent<Toggle>();
+        }
+        catch (Exception) {
+        }
+
         MsgBox.AddText("Welcome!");
     }
 
     // Update is called once per frame
     void Update() {
-        if (!TryGetTouchPosition(out TouchPosition)) {
-            return;
+        if (isPositionLockedToggle != null) {
+            IsPositionLocked = isPositionLockedToggle.value;
         }
-        FingerDown(TouchPosition);
-        if (RotateButtonL != null && RotateButtonL.HasMouseCapture()) {
-            RotateGameOrigin("R");
+
+        if (IsPositionLocked) {
+            //ARRaycastManager.enabled = false;
+            //ARPlaneManager.enabled = false;
+        }
+        else {
+            //ARRaycastManager.enabled = true;
+            //ARPlaneManager.enabled = true;
+            if (TryGetTouchPosition(out TouchPosition)) {
+                FingerDown(TouchPosition);
+            }
+            if (Input.GetButtonDown("GameOriginRotateButtonL")) {
+                RotateGameOrigin(-1);
+            }
+            if (Input.GetButtonDown("GameOriginRotateButtonR")) {
+                RotateGameOrigin(1);
+            }
         }
     }
 
@@ -75,14 +111,14 @@ public class PlaceGame : MonoBehaviour {
         }
     }
 
-    private void RotateGameOrigin(string direction) {
-        if (direction == "L") {
+    private void RotateGameOrigin(int direction) {
+        if (direction == -1) {
             MsgBox.AddText("RotateGameOrigin L");
-            GameOrigin.transform.rotation.
+            GameOrigin.transform.Rotate(0, -RotationStep, 0);
         }
-        else if (direction == "R") {
+        else if (direction == 1) {
             MsgBox.AddText("RotateGameOrigin R");
-
+            GameOrigin.transform.Rotate(0, RotationStep, 0);
         }
         else {
             MsgBox.AddText("RotateGameOrigin error. direction=" + direction);
