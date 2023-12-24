@@ -66,17 +66,13 @@ public class PlaceGame : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (IsPositionLockedToggle != null) {
-            IsPositionLocked = IsPositionLockedToggle.isOn;
-        }
-
-        if (IsPositionLocked) {
-            //ARRaycastManager.enabled = false;
-            //ARPlaneManager.enabled = false;
+        if (IsPositionLockedToggle != null && IsPositionLockedToggle.isOn) {
+            ARRaycastManager.enabled = false;
+            ARPlaneManager.enabled = false;
         }
         else {
-            //ARRaycastManager.enabled = true;
-            //ARPlaneManager.enabled = true;
+            ARRaycastManager.enabled = true;
+            ARPlaneManager.enabled = true;
             if (TryGetTouchPosition(out TouchPosition)) {
                 FingerDown(TouchPosition);
             }
