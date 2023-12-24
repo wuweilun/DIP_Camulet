@@ -19,7 +19,7 @@ public class PlaceGame : MonoBehaviour {
     private GameObject Prefab;
 
     [SerializeField]
-    Button RotateButtonL;
+    public Button RotateButtonL;
 
     [SerializeField]
     public Button RotateButtonR;
@@ -42,9 +42,19 @@ public class PlaceGame : MonoBehaviour {
 
     private bool IsPositionLocked = false;
 
+    private GameOriginRotateButtonL btnL;
+    private GameOriginRotateButtonR btnR;
+
     private void Awake() {
         ARRaycastManager = GetComponent<ARRaycastManager>();
         ARPlaneManager = GetComponent<ARPlaneManager>();
+        try {
+            btnL = RotateButtonL.GetComponent<GameOriginRotateButtonL>();
+            btnR = RotateButtonR.GetComponent<GameOriginRotateButtonR>();
+        }
+        catch (Exception) {
+            MsgBox.AddText("Can not find GameOriginRotateButtonL or GameOriginRotateButtonR");
+        }
     }
 
     // Start is called before the first frame update
@@ -70,10 +80,10 @@ public class PlaceGame : MonoBehaviour {
             if (TryGetTouchPosition(out TouchPosition)) {
                 FingerDown(TouchPosition);
             }
-            if (Input.GetButtonDown("GameOriginRotateButtonL")) {
+            if (btnL != null && btnL.ButtonPressed) {
                 RotateGameOrigin(-1);
             }
-            if (Input.GetButtonDown("GameOriginRotateButtonR")) {
+            if (btnR != null && btnR.ButtonPressed) {
                 RotateGameOrigin(1);
             }
         }
