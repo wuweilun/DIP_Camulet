@@ -47,6 +47,8 @@ public class PlaceGame : MonoBehaviour {
 
     private float Scale = 1.0f;
 
+    private float PositionYOffset = 0.0f;
+
     private void Awake() {
         ARRaycastManager = GetComponent<ARRaycastManager>();
         ARPlaneManager = GetComponent<ARPlaneManager>();
@@ -154,5 +156,19 @@ public class PlaceGame : MonoBehaviour {
         this.Scale = newScale;
         this.GameOrigin.transform.localScale = new Vector3(newScale, newScale, newScale);
         MsgBox.AddText($"New scale: [{newScale}]");
+    }
+
+    public void PositionYUp() {
+        ChangePositionY(0.02f);
+    }
+
+    public void PositionYDown() {
+        ChangePositionY(-0.02f);
+    }
+
+    private void ChangePositionY(float yOffset) {
+        this.PositionYOffset += yOffset;
+        this.GameOrigin.transform.Translate(new Vector3(0, yOffset, 0));
+        MsgBox.AddText($"PositionYOffset: [{this.PositionYOffset}]");
     }
 }
