@@ -8,6 +8,7 @@ TagManager:
   - MsgBoxTextMesh
   - ArOrigin
   - GameOrigin
+  - dragon
   layers:
   - Default
   - TransparentFX
