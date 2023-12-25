@@ -32,15 +32,29 @@ public class LightningDetect : MonoBehaviour
         // Debug.Log("Add BoxCollider w/ size:"+ coll.size);
         // Debug.Log("Add BoxCollider w/ boundsize:"+ coll.bounds.size);  // depend on parent scale (not variable)
         // Debug.Log("Add BoxCollider w/ pos:"+ coll.transform.position);
-        
+
     }
     void OnTriggerEnter(Collider camera)
     {
         if (camera.gameObject.tag == "MainCamera")
         {
-            Debug.Log("OnTriggerEnter!!" ); 
+            Debug.Log("OnTriggerEnter!!" );
             // StartCoroutine("WaitForSec");
+
+            // Trigger phone vibration and damage effect
+            StartCoroutine(VibrateScreenEffect());
+            GameManager.instance.ApplyDamageEffect();
         }
     }
-// TODO: show warning on screen when trigger
+
+    IEnumerator VibrateScreenEffect()
+    {
+        // Vibrate the phone
+        Handheld.Vibrate();
+
+        // You can add additional effects or actions here during the vibration
+
+        yield return null;
+    }
+    // TODO: show warning on screen when trigger
 }
