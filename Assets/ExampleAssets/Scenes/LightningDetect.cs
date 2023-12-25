@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// using static MsgBox;
 
 public class LightningDetect : MonoBehaviour
 {
@@ -42,17 +43,24 @@ public class LightningDetect : MonoBehaviour
     {
         if (camera.gameObject.tag == "MainCamera")
         {
-            // Debug.Log("OnTriggerEnter!!" ); 
+            Debug.Log("OnTriggerEnter!!" ); 
             MsgBox.AddText("Trigger Lightning!!");
             ScoreMsgBox.TouchLight();
-            // StartCoroutine(ShowMsg());
-            
+
+            // Trigger phone vibration and damage effect
+            StartCoroutine(VibrateScreenEffect());
+            GameManager.instance.ApplyDamageEffect();
         }
     }
 
-    // IEnumerator ShowMsg(){
-    //     MsgBox.AddText("Trigger Lightning!!");
-    //     yield return new WaitForSeconds(2);
-    //     MsgBox.Clear();
-    // }  
+    IEnumerator VibrateScreenEffect()
+    {
+        // Vibrate the phone
+        Handheld.Vibrate();
+
+        // You can add additional effects or actions here during the vibration
+
+        yield return null;
+    }
+    // TODO: show warning on screen when trigger
 }
