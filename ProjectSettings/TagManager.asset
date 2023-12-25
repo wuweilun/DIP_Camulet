@@ -11,6 +11,8 @@ TagManager:
   - dragon
   - ScoreMsgBox
   - ScoreMsgBoxTextMesh
+  - PlayerMsgBox
+  - PlayerMsgBoxTextMessh
   layers:
   - Default
   - TransparentFX

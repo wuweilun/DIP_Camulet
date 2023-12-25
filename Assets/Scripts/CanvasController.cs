@@ -9,11 +9,14 @@ public class CanvasController : MonoBehaviour {
     [SerializeField]
     public GameObject ScoreMsgBoxTextMesh;
 
+    [SerializeField]
+    public GameObject PlayerMsgBoxTextMesh;
+
     // Start is called before the first frame update
     void Start() {
         MsgBoxTextMesh.SetActive(false);
-        // ScoreMsgBoxTextMesh = GameObject.FindGameObjectWithTag("ScoreMsgBoxTextMesh");
         ScoreMsgBoxTextMesh.SetActive(true);
+        PlayerMsgBoxTextMesh.SetActive(true);
     }
 
     // Update is called once per frame
