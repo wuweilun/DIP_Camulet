@@ -11,6 +11,7 @@ TagManager:
   - dragon
   - ScoreMsgBox
   - ScoreMsgBoxTextMesh
+  - ToolBar
   layers:
   - Default
   - TransparentFX
