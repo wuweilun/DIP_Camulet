@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/ExampleAssets/Scenes/lighting_dragon_effect_score.unity
     guid: d07d0b308a7784b42bfd10953dc7854a
-  - enabled: 1
+  - enabled: 0
     path: Assets/ExampleAssets/Scenes/lighting_dragon_effect_score_new_v3.unity
     guid: 3ce40f361ab1ac644b14f9b122b849d2
+  - enabled: 1
+    path: Assets/ExampleAssets/Scenes/all_meterials.unity
+    guid: 98938d832186f30489b2d716f5bf0aa8
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}

@@ -3640,7 +3640,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1829947923}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1561834549
+--- !u!114 &1561834553
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4408,7 +4408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 430986, guid: 2736bbc2f2c78a949957b0719c2992bd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.4299417
+      value: -2.429941
       objectReference: {fileID: 0}
     - target: {fileID: 430986, guid: 2736bbc2f2c78a949957b0719c2992bd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4454,6 +4454,12 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -5
       objectReference: {fileID: 0}
+    - target: {fileID: 2439273211429326344, guid: 2736bbc2f2c78a949957b0719c2992bd,
+        type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: f2ef5a5129c2c584b98706ea08e22771,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4461,7 +4467,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 178460, guid: 2736bbc2f2c78a949957b0719c2992bd,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1561834549}
+      addedObject: {fileID: 1561834553}
   m_SourcePrefab: {fileID: 100100000, guid: 2736bbc2f2c78a949957b0719c2992bd, type: 3}
 --- !u!1 &1849365530
 GameObject:
