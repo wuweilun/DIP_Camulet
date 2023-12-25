@@ -3309,7 +3309,6 @@ GameObject:
   - component: {fileID: 1516822525}
   - component: {fileID: 1516822524}
   - component: {fileID: 1516822523}
-  - component: {fileID: 1516822522}
   m_Layer: 5
   m_Name: GameOriginRotateButtonR
   m_TagString: Untagged
@@ -3337,19 +3336,6 @@ RectTransform:
   m_AnchoredPosition: {x: 561, y: 50}
   m_SizeDelta: {x: 50, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1516822522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516822520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d633c3cadbb372942ab4be2d1078018f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ButtonPressed: 0
 --- !u!114 &1516822523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3393,7 +3379,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1516822524}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1491787576}
+        m_TargetAssemblyTypeName: PlaceGame, Assembly-CSharp
+        m_MethodName: RotateGameOriginR
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1516822524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3924,7 +3922,6 @@ GameObject:
   - component: {fileID: 1741079630}
   - component: {fileID: 1741079629}
   - component: {fileID: 1741079628}
-  - component: {fileID: 1741079627}
   m_Layer: 5
   m_Name: GameOriginRotateButtonL
   m_TagString: Untagged
@@ -3952,19 +3949,6 @@ RectTransform:
   m_AnchoredPosition: {x: 446.4, y: 50}
   m_SizeDelta: {x: 50, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1741079627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1741079625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15ac36680fa9e5f4ab93366cb468f567, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ButtonPressed: 0
 --- !u!114 &1741079628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4008,7 +3992,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1741079629}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1491787576}
+        m_TargetAssemblyTypeName: PlaceGame, Assembly-CSharp
+        m_MethodName: RotateGameOriginL
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1741079629
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -141,28 +141,28 @@ public class PlaceGame : MonoBehaviour {
     }
 
     private void RotateGameOrigin(float angle) {
-        GameOrigin.transform.Rotate(0, angle, 0);
-        MsgBox.AddText($"RotateGameOrigin {this.GameOrigin.transform.rotation}");
+        if (!this.IsPositionLocked) {
+            GameOrigin.transform.Rotate(0, angle, 0);
+            MsgBox.AddText($"RotateGameOrigin {this.GameOrigin.transform.rotation}");
+        }
     }
 
     public void ScaleButtonUp() {
-        if (!this.IsPositionLocked) {
-            MsgBox.AddText($"ScaleButtonUp.");
-            ChangeScale(this.Scale * 1.05f);
-        }
+        MsgBox.AddText($"ScaleButtonUp.");
+        ChangeScale(this.Scale * 1.05f);
     }
 
     public void ScaleButtonDown() {
-        if (!this.IsPositionLocked) {
-            MsgBox.AddText($"ScaleButtonDown.");
-            ChangeScale(this.Scale * 0.95f);
-        }
+        MsgBox.AddText($"ScaleButtonDown.");
+        ChangeScale(this.Scale * 0.95f);
     }
 
     private void ChangeScale(float newScale) {
-        this.Scale = newScale;
-        this.GameOrigin.transform.localScale = new Vector3(newScale, newScale, newScale);
-        MsgBox.AddText($"New scale: [{newScale}]");
+        if (!this.IsPositionLocked) {
+            this.Scale = newScale;
+            this.GameOrigin.transform.localScale = new Vector3(newScale, newScale, newScale);
+            MsgBox.AddText($"New scale: [{newScale}]");
+        }
     }
 
     public void PositionYUp() {
@@ -174,8 +174,10 @@ public class PlaceGame : MonoBehaviour {
     }
 
     private void ChangePositionY(float yOffset) {
-        this.PositionYOffset += yOffset;
-        this.GameOrigin.transform.Translate(new Vector3(0, yOffset, 0));
-        MsgBox.AddText($"PositionYOffset: [{this.PositionYOffset}]");
+        if (!this.IsPositionLocked) {
+            this.PositionYOffset += yOffset;
+            this.GameOrigin.transform.Translate(new Vector3(0, yOffset, 0));
+            MsgBox.AddText($"PositionYOffset: [{this.PositionYOffset}]");
+        }
     }
 }
