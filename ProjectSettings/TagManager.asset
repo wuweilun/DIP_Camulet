@@ -4,7 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - MsgBox
+  - MsgBoxTextMesh
+  - ArOrigin
+  - GameOrigin
   - dragon
+  - ScoreMsgBox
+  - ScoreMsgBoxTextMesh
   layers:
   - Default
   - TransparentFX

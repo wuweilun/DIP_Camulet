@@ -9,10 +9,8 @@ public class LightningDetect : MonoBehaviour
     /* Options of changing Lightning size:
        a. Scale x of SimpleLightningBoltAnimatedPrefab
        b. Change postion x in children LightningStart & LightningEnd */
-    
-    private IEnumerator coroutine;
-    // private MsgBox MsgBox;
-    private bool triggered;
+    private MsgBox MsgBox;
+    private PlayerScoreMsg ScoreMsgBox;
     void Start()
     {
         // get size of lighning by x & z coordinate
@@ -37,13 +35,17 @@ public class LightningDetect : MonoBehaviour
         // Debug.Log("Add BoxCollider w/ size:"+ coll.size);
         // Debug.Log("Add BoxCollider w/ boundsize:"+ coll.bounds.size);  // depend on parent scale (not variable)
         // Debug.Log("Add BoxCollider w/ pos:"+ coll.transform.position);
+        
+        MsgBox = GameObject.FindGameObjectWithTag("MsgBox").GetComponent<MsgBox>();
+        ScoreMsgBox = GameObject.FindGameObjectWithTag("ScoreMsgBox").GetComponent<PlayerScoreMsg>();
     }
     void OnTriggerEnter(Collider camera)
     {
         if (camera.gameObject.tag == "MainCamera")
         {
-            Debug.Log("OnTriggerEnter!!" );
-            // StartCoroutine("WaitForSec");
+            Debug.Log("OnTriggerEnter!!" ); 
+            MsgBox.AddText("Trigger Lightning!!");
+            ScoreMsgBox.TouchLight();
 
             // Trigger phone vibration and damage effect
             StartCoroutine(VibrateScreenEffect());

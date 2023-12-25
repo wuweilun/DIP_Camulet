@@ -10,10 +10,11 @@ public class DragonRemove : MonoBehaviour
     public Camera raycastCamera;
     // private List<ARRaycastHit> hits = new List<ARRaycastHit>();
     public RaycastHit hit;
+    private PlayerScoreMsg ScoreMsgBox;
     // Start is called before the first frame update
     void Start()
     {
-
+    ScoreMsgBox = GameObject.FindGameObjectWithTag("ScoreMsgBox").GetComponent<PlayerScoreMsg>();
     }
 
     // Update is called once per frame
@@ -29,6 +30,7 @@ public class DragonRemove : MonoBehaviour
                 {
                     Debug.Log("Raycast hit dragon");
                     Destroy(hit.collider.gameObject);
+                    ScoreMsgBox.CollectDragon();
                 }
                 else
                 {
