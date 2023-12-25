@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// using static MsgBox;
 
 public class LightningDetect : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class LightningDetect : MonoBehaviour
     /* Options of changing Lightning size:
        a. Scale x of SimpleLightningBoltAnimatedPrefab
        b. Change postion x in children LightningStart & LightningEnd */
+    
+    private IEnumerator coroutine;
+    // private MsgBox MsgBox;
+    private bool triggered;
     void Start()
     {
         // get size of lighning by x & z coordinate
@@ -32,15 +37,35 @@ public class LightningDetect : MonoBehaviour
         // Debug.Log("Add BoxCollider w/ size:"+ coll.size);
         // Debug.Log("Add BoxCollider w/ boundsize:"+ coll.bounds.size);  // depend on parent scale (not variable)
         // Debug.Log("Add BoxCollider w/ pos:"+ coll.transform.position);
-        
+        triggered = false;
     }
     void OnTriggerEnter(Collider camera)
     {
         if (camera.gameObject.tag == "MainCamera")
         {
-            Debug.Log("OnTriggerEnter!!" ); 
-            // StartCoroutine("WaitForSec");
+            Debug.Log("OnTriggerEnter!!");
+            triggered = true;
+            // coroutine = ShowMsgBox();
+            // StartCoroutine(coroutine);
         }
     }
+    // private IEnumerator ShowMsgBox()
+    // {
+    //     MsgBox.AddText("you die"); 
+    //     // MBox msgbox = new MBox();
+    //     // Destroy(msgbox,3);
+    //     yield return true;
+        
+    // }
+    void OnGUI() {
+        if (triggered) {
+            GUI.Label(new Rect(10, 10, 100, 20), "Danger");
+            Debug.Log("GUI");
+        }
+        triggered = false;
+    }
+    
+
+
 // TODO: show warning on screen when trigger
 }
