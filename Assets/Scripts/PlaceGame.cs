@@ -49,6 +49,8 @@ public class PlaceGame : MonoBehaviour {
 
     private float PositionYOffset = 0.0f;
 
+    private GameObject SpiralPlane;
+
     private void Awake() {
         ARRaycastManager = GetComponent<ARRaycastManager>();
         ARPlaneManager = GetComponent<ARPlaneManager>();
@@ -65,6 +67,8 @@ public class PlaceGame : MonoBehaviour {
     void Start() {
         MsgBox = GameObject.FindGameObjectWithTag("MsgBox").GetComponent<MsgBox>();
         GameOrigin = GameObject.FindGameObjectWithTag("GameOrigin");
+        this.SpiralPlane = GameObject.Find("/GameOrigin/Spiral_Plane");
+
         MsgBox.AddText("Welcome!");
 
         GameObject toolbar = GameObject.FindGameObjectWithTag("ToolBar");
@@ -119,7 +123,9 @@ public class PlaceGame : MonoBehaviour {
         if (ARRaycastManager.Raycast(touchPosition, Hits, TrackableType.PlaneWithinPolygon)) {
             Pose pose = Hits[0].pose;
             //Instantiate(Prefab, pose.position,pose.rotation);
-            GameOrigin.transform.position = pose.position;
+
+            Vector3 diff = pose.position - this.SpiralPlane.transform.position;
+            GameOrigin.transform.position += diff;
             MsgBox.AddText($"FingerDown: Init obj at {pose.position} {pose.rotation}");
         }
     }
