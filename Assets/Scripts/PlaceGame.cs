@@ -15,8 +15,6 @@ public class PlaceGame : MonoBehaviour {
     /// <summary>
     /// For testing. Spawn a cube.
     /// </summary>
-    [SerializeField]
-    private GameObject Prefab;
 
     [SerializeField]
     public Button RotateButtonL;
@@ -45,6 +43,12 @@ public class PlaceGame : MonoBehaviour {
     private GameOriginRotateButtonL btnL;
     private GameOriginRotateButtonR btnR;
 
+    private float ToolbarHeight;
+
+    private float Scale = 1.0f;
+
+    private float PositionYOffset = 0.0f;
+
     private void Awake() {
         ARRaycastManager = GetComponent<ARRaycastManager>();
         ARPlaneManager = GetComponent<ARPlaneManager>();
@@ -62,11 +66,19 @@ public class PlaceGame : MonoBehaviour {
         MsgBox = GameObject.FindGameObjectWithTag("MsgBox").GetComponent<MsgBox>();
         GameOrigin = GameObject.FindGameObjectWithTag("GameOrigin");
         MsgBox.AddText("Welcome!");
+
+        GameObject toolbar = GameObject.FindGameObjectWithTag("ToolBar");
+        var rect = toolbar.GetComponent<RectTransform>();
+        this.ToolbarHeight = rect.rect.height;
     }
 
     // Update is called once per frame
     void Update() {
-        if (IsPositionLockedToggle != null && IsPositionLockedToggle.isOn) {
+        if (IsPositionLockedToggle != null) {
+            this.IsPositionLocked = IsPositionLockedToggle.isOn;
+        }
+
+        if (this.IsPositionLocked) {
             ARRaycastManager.enabled = false;
             ARPlaneManager.enabled = false;
         }
@@ -96,6 +108,14 @@ public class PlaceGame : MonoBehaviour {
 
     private void FingerDown(Vector2 touchPosition) {
         MsgBox.AddText("FingerDown: " + touchPosition);
+
+        // (0,0) is at bottom left of the screen.
+        // Filter out the touch on the toolbar.
+        if (touchPosition.y <= this.ToolbarHeight) {
+            MsgBox.AddText("FingerDown at toolbar " + touchPosition);
+            return;
+        }
+
         if (ARRaycastManager.Raycast(touchPosition, Hits, TrackableType.PlaneWithinPolygon)) {
             Pose pose = Hits[0].pose;
             //Instantiate(Prefab, pose.position,pose.rotation);
@@ -116,5 +136,39 @@ public class PlaceGame : MonoBehaviour {
         else {
             MsgBox.AddText("RotateGameOrigin error. direction=" + direction);
         }
+    }
+
+    public void ScaleButtonUp() {
+        if (!this.IsPositionLocked) {
+            MsgBox.AddText($"ScaleButtonUp.");
+            ChangeScale(this.Scale * 1.05f);
+        }
+    }
+
+    public void ScaleButtonDown() {
+        if (!this.IsPositionLocked) {
+            MsgBox.AddText($"ScaleButtonDown.");
+            ChangeScale(this.Scale * 0.95f);
+        }
+    }
+
+    private void ChangeScale(float newScale) {
+        this.Scale = newScale;
+        this.GameOrigin.transform.localScale = new Vector3(newScale, newScale, newScale);
+        MsgBox.AddText($"New scale: [{newScale}]");
+    }
+
+    public void PositionYUp() {
+        ChangePositionY(0.02f);
+    }
+
+    public void PositionYDown() {
+        ChangePositionY(-0.02f);
+    }
+
+    private void ChangePositionY(float yOffset) {
+        this.PositionYOffset += yOffset;
+        this.GameOrigin.transform.Translate(new Vector3(0, yOffset, 0));
+        MsgBox.AddText($"PositionYOffset: [{this.PositionYOffset}]");
     }
 }
