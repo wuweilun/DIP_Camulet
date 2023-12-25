@@ -5,10 +5,15 @@ using UnityEngine;
 public class CanvasController : MonoBehaviour {
     [SerializeField]
     public GameObject MsgBoxTextMesh;
+    
+    [SerializeField]
+    public GameObject ScoreMsgBoxTextMesh;
 
     // Start is called before the first frame update
     void Start() {
         MsgBoxTextMesh.SetActive(false);
+        // ScoreMsgBoxTextMesh = GameObject.FindGameObjectWithTag("ScoreMsgBoxTextMesh");
+        ScoreMsgBoxTextMesh.SetActive(true);
     }
 
     // Update is called once per frame

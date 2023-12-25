@@ -8,6 +8,8 @@ public class LightningDetect : MonoBehaviour
     /* Options of changing Lightning size:
        a. Scale x of SimpleLightningBoltAnimatedPrefab
        b. Change postion x in children LightningStart & LightningEnd */
+    private MsgBox MsgBox;
+    private PlayerScoreMsg ScoreMsgBox;
     void Start()
     {
         // get size of lighning by x & z coordinate
@@ -33,14 +35,24 @@ public class LightningDetect : MonoBehaviour
         // Debug.Log("Add BoxCollider w/ boundsize:"+ coll.bounds.size);  // depend on parent scale (not variable)
         // Debug.Log("Add BoxCollider w/ pos:"+ coll.transform.position);
         
+        MsgBox = GameObject.FindGameObjectWithTag("MsgBox").GetComponent<MsgBox>();
+        ScoreMsgBox = GameObject.FindGameObjectWithTag("ScoreMsgBox").GetComponent<PlayerScoreMsg>();
     }
     void OnTriggerEnter(Collider camera)
     {
         if (camera.gameObject.tag == "MainCamera")
         {
-            Debug.Log("OnTriggerEnter!!" ); 
-            // StartCoroutine("WaitForSec");
+            // Debug.Log("OnTriggerEnter!!" ); 
+            MsgBox.AddText("Trigger Lightning!!");
+            ScoreMsgBox.TouchLight();
+            // StartCoroutine(ShowMsg());
+            
         }
     }
-// TODO: show warning on screen when trigger
+
+    // IEnumerator ShowMsg(){
+    //     MsgBox.AddText("Trigger Lightning!!");
+    //     yield return new WaitForSeconds(2);
+    //     MsgBox.Clear();
+    // }  
 }

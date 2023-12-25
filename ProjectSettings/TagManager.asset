@@ -9,6 +9,8 @@ TagManager:
   - ArOrigin
   - GameOrigin
   - dragon
+  - ScoreMsgBox
+  - ScoreMsgBoxTextMesh
   layers:
   - Default
   - TransparentFX

@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/ExampleAssets/Scenes/lighting_dragon.unity
     guid: 9e02a863e2d56b248b3f4afea76c5b78
+  - enabled: 1
+    path: Assets/ExampleAssets/Scenes/lighting_msg_dragon.unity
+    guid: 01f35d3b1733a1c499557a424e73c047
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}

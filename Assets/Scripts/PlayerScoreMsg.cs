@@ -6,15 +6,19 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
-public class MsgBox : MonoBehaviour {
+public class PlayerScoreMsg : MonoBehaviour {
     public TextMeshProUGUI TextMesh;
 
     private List<string> MessageQueue = new List<string>();
-    private int MaxLine = 25;
+    private int MaxLine = 1;
+    private int light_count = 0;
+    private int dragon_count = 0;
 
     // Start is called before the first frame update
     void Start() {
-        TextMesh.text = "test";
+        TextMesh.text = "" ; // + light_count.ToString()
+        MessageQueue.Add("lightning:" + light_count.ToString() + "\n" + "dragon:" + dragon_count.ToString());
+        // TextMesh.color =  new Color(222, 41, 22, 255);
     }
 
     // Update is called once per frame
@@ -23,7 +27,17 @@ public class MsgBox : MonoBehaviour {
     }
 
     public void AddText(string text) {
-        MessageQueue.Add("[" + DateTime.Now.ToString("HH:mm:ss") + "] " + text + "\n");
+        MessageQueue.Add( text + "\n");
+    }
+    
+    public void TouchLight() {
+        light_count = light_count + 1;
+        MessageQueue.Add( "lightning:" + light_count.ToString() + "\n" + "dragon:" + dragon_count.ToString());
+    }
+
+    public void CollectDragon() {
+        dragon_count = dragon_count + 1;
+        MessageQueue.Add( "lightning:" + light_count.ToString() + "\n" + "dragon:" + dragon_count.ToString());
     }
 
     void Display() {
