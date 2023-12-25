@@ -36,7 +36,7 @@ public class PlaceGame : MonoBehaviour {
 
     private GameObject GameOrigin;
 
-    private int RotationStep = 10;
+    private int RotationStep = 2;
 
     private bool IsPositionLocked = false;
 
@@ -92,12 +92,12 @@ public class PlaceGame : MonoBehaviour {
             if (TryGetTouchPosition(out TouchPosition)) {
                 FingerDown(TouchPosition);
             }
-            if (btnL != null && btnL.ButtonPressed) {
-                RotateGameOrigin(-1);
-            }
-            if (btnR != null && btnR.ButtonPressed) {
-                RotateGameOrigin(1);
-            }
+            //if (btnL != null && btnL.ButtonPressed) {
+            //    RotateGameOrigin(-1);
+            //}
+            //if (btnR != null && btnR.ButtonPressed) {
+            //    RotateGameOrigin(1);
+            //}
         }
     }
 
@@ -130,18 +130,19 @@ public class PlaceGame : MonoBehaviour {
         }
     }
 
-    private void RotateGameOrigin(int direction) {
-        if (direction == -1) {
-            MsgBox.AddText("RotateGameOrigin L");
-            GameOrigin.transform.Rotate(0, -RotationStep, 0);
-        }
-        else if (direction == 1) {
-            MsgBox.AddText("RotateGameOrigin R");
-            GameOrigin.transform.Rotate(0, RotationStep, 0);
-        }
-        else {
-            MsgBox.AddText("RotateGameOrigin error. direction=" + direction);
-        }
+    public void RotateGameOriginL() {
+        MsgBox.AddText("RotateGameOrigin L");
+        RotateGameOrigin(-this.RotationStep);
+    }
+
+    public void RotateGameOriginR() {
+        MsgBox.AddText("RotateGameOrigin R");
+        RotateGameOrigin(this.RotationStep);
+    }
+
+    private void RotateGameOrigin(float angle) {
+        GameOrigin.transform.Rotate(0, angle, 0);
+        MsgBox.AddText($"RotateGameOrigin {this.GameOrigin.transform.rotation}");
     }
 
     public void ScaleButtonUp() {
