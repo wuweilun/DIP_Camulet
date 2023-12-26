@@ -26,8 +26,8 @@ public class LightningDetect : MonoBehaviour
         // Debug.Log("global scale:"+ global_scale);
 
         var col_size_x = len/global_scale.x;
-        var col_size_y = 0.5f/global_scale.y;
-        var col_size_z = 0.5f/global_scale.z;
+        var col_size_y = 0.1f/global_scale.y;
+        var col_size_z = 0.1f/global_scale.z;
 
         // lightning.SetActive(false);
         BoxCollider coll = gameObject.AddComponent<BoxCollider>();
