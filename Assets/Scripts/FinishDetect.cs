@@ -23,7 +23,10 @@ public class FinishDetect : MonoBehaviour
         {
             Debug.Log("Enter finish area" ); 
             MsgBox.AddText("Enter finish area");
-            if (ScoreMsgBox.CollectAllDragons()){
+            // var gos  = GameObject[];
+            // gos = GameObject.FindGameObjectsWithTag("dragon");
+            if(GameObject.FindGameObjectsWithTag("dragon").Length == 0){
+            // if (ScoreMsgBox.CollectAllDragons()){
                 FinishMsgBox.AddText("Congratulations!");
                 StartCoroutine(ClearText());
             }
