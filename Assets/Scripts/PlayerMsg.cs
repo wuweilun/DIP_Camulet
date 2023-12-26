@@ -14,7 +14,8 @@ public class PlayerMsg : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        TextMesh.text = "" ; // + light_count.ToString()
+        TextMesh.text = "" ; 
+        MessageQueue.Add("");
     }
 
     // Update is called once per frame
