@@ -21,3 +21,4 @@ tap the screen to collect mythical creatures that appear in the Dual Helix Plaza
 - Unity asset store
 [Lighting](https://assetstore.unity.com/packages/tools/particles-effects/lightning-bolt-effect-for-unity-59471#description)
 [Dragon](https://assetstore.unity.com/packages/3d/characters/creatures/dragon-for-boss-monster-hp-79398)
+[Font](https://assetstore.unity.com/packages/2d/fonts/free-pixel-font-thaleah-140059)
